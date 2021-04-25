@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 class Connection {
   constructor() {
-    this.url = 'mongodb+srv://japaodev_root:46557985@cluster0.s2dso.mongodb.net/microservice?retryWrites=true&w=majority'
+    this.url = 'mongodb://localhost/microservice'
   }
 
   connect() {
