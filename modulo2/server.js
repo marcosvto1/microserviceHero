@@ -4,9 +4,12 @@ const CategorieModel = require('./schemas/categorie');
 
 CategorieService.on('categorie.create', async ({data}, cb) => {
   const { name } = data;
-  const res = new CategorieModel({ name });
+  const res = await CategorieModel.create({ name });
   await res.save();
-  cb(res);
+  cb({
+    _id: res._id,
+    name: res.name
+  });
 });
 
 CategorieService.on('categorie.update', async ({id, data}, cb) => {

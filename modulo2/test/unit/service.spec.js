@@ -1,23 +1,26 @@
-const cote = require('cote');
-const client = new cote.Requester({name: 'broker'});
+const cote = require("cote");
+const sinon = require("sinon");
+const client = new cote.Requester({ name: "broker" });
+const { expect } = require("chai");
+require("dotenv").config();
 
-const { expect } = require('chai');
-
-describe('Teste Service Categories', async () => {
-
+describe("Teste Service Categories", () => {
   beforeEach(() => {
-    require('../../index');
-  })
+    require("../../server");
+    const Connection = require("../../schemas/connection");
+    Connection.connect();
+  });
 
   it('Test categories Service "categorie.create"', async () => {
-
     const categorie = await new Promise((resolve) => {
-      client.send({ type: 'categorie.create', data: { name: 'Marcos' }}, res => {
-        resolve(res);
-      });
+      client.send(
+        { type: "categorie.create", data: { name: "rwa" } },
+        (res) => {
+          resolve(res);
+        }
+      );
     });
 
     expect(categorie).to.eqls({ _id: categorie._id, name: categorie.name });
-
   });
 });
